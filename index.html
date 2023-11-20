@@ -258,7 +258,7 @@
 
 <body data-invalid-name-text="¡Introduzca su nombre correctamente!"
     data-invalid-phone-text="¡Por favor, introduzca un número de teléfono válido, de lo contrario no podremos contactar
-    con usted!"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    con usted!"><script src="js/jquery.min.js"></script>
 
     <div id="app">
         <div class="App App--isMaterial">
@@ -593,9 +593,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- <form name="email-form" method="post" action=""
+                                                    <form name="email-form" method="post" action=""
                                                         class="form x_order_form">
-
+<select name="country_code" id="country_code_selector" class="text-field w-input">
+    <option value="MX">México</option>
+</select>
                                                         <label class="field-label"><strong
                                                                 class="bold-text-6">INTRODUZCA SU
                                                                 NOMBRE:</strong></label>
@@ -611,7 +613,7 @@
                                                             id="phone-4" required="" autocomplete="tel" value="">
                                                         <input type="submit" value="COMPRAR CON DESCUENTO"
                                                             class="submit-button submit-button-2 submit-button-3 w-button">
-                                                    </form> -->
+                                                    </form>
                                                     <div class="w-form-done">
                                                         <div>¡Gracias! ¡Su solicitud ha sido recibida!</div>
                                                     </div>
@@ -764,7 +766,8 @@
                                                     <form name="email-form" data-name="Email Form" method="post"
                                                         action="" class="form x_order_form">
 
-                                                        <select name="country_code" id="country_code_selector">
+                                                        <select name="country_code" id="country_code_selector"
+                                                            class="text-field w-input">
                                                             <option value="MX">México</option>
                                                         </select>
                                                         <label class="field-label"><strong
@@ -828,7 +831,7 @@
                 displayCode: true, // отображать код страны при вводе (default)
                 displayLeadingPlus: true, // выводить "+" спереди телефонного кода (default)
                 formats: {
-                    pe: '+52-***-***-****' // формат для вашей страны
+                    pe: '+52 *** *** ****' // формат для вашей страны
                 }
             });
         });
