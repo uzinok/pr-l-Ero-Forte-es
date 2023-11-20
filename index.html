@@ -254,10 +254,25 @@
             }
         }
     </style>
+    <script>
+        function dtime(num) {
+            const date = new Date();
+
+            date.setDate(date.getDate() + num);
+            var options = {
+                month: 'long',
+                day: 'numeric',
+            };
+            document.write(date.toLocaleString("es", options));
+        }
+window.addEventListener("load", function() {
+            (new Date).getFullYear();
+            for (var e = document.querySelectorAll(".ryear"), t = 0; t < e.length; t++) e[t].innerText = (new Date)
+                .getFullYear()});
+    </script>
 </head>
 
-<body data-invalid-name-text="¡Introduzca su nombre correctamente!"
-    data-invalid-phone-text="¡Por favor, introduzca un número de teléfono válido, de lo contrario no podremos contactar
+<body data-invalid-name-text="¡Introduzca su nombre correctamente!" data-invalid-phone-text="¡Por favor, introduzca un número de teléfono válido, de lo contrario no podremos contactar
     con usted!">
 
     <div id="app">
@@ -318,7 +333,11 @@
                                 <div class="MediaMaterial-meta">
                                     <div class="MaterialMeta MaterialMeta--source">Pensinfo</div>
                                     <div class="MaterialMeta MaterialMeta--time">
-                                        <span class="date-3" data-format="dd monthFull yyyy">15.11.2023</span>
+                                        <span class="date-3" data-format="dd monthFull yyyy">
+                                            <script>
+                                                dtime(-3)
+                                            </script>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -598,14 +617,14 @@
                                                         <label class="field-label"><strong
                                                                 class="bold-text-6">INTRODUZCA SU
                                                                 NOMBRE:</strong></label>
-                                                        <input type="text" class="text-field w-input" name="name" placeholder="Ingrese su apellido y nombre">
+                                                        <input type="text" class="text-field w-input" name="name"
+                                                            placeholder="Ingrese su apellido y nombre">
                                                         <label><strong class="bold-text-6">INTRODUZCA SU DE
                                                                 TELÉFONO:<br></strong></label>
                                                         <input type="tel" class="text-field-2 w-input" name="phone"
                                                             placeholder="Introduzca su número de teléfono móvil"
                                                             data-phone-pattern>
-                                                        <input type="submit" value="COMPRAR CON DESCUENTO"
-                                                            class="submit-button submit-button-2 submit-button-3
+                                                        <input type="submit" value="COMPRAR CON DESCUENTO" class="submit-button submit-button-2 submit-button-3
                                                             w-button">
                                                     </form>
                                                 </div>
@@ -756,7 +775,8 @@
                                                         <label class="field-label"><strong
                                                                 class="bold-text-6">INTRODUZCA SU
                                                                 NOMBRE:</strong></label>
-                                                        <input type="text" class="text-field w-input" name="name" placeholder="Ingrese su apellido y nombre">
+                                                        <input type="text" class="text-field w-input" name="name"
+                                                            placeholder="Ingrese su apellido y nombre">
                                                         <label><strong class="bold-text-6">INTRODUZCA SU DE
                                                                 TELÉFONO:<br></strong></label>
                                                         <input type="tel" class="text-field-2 w-input"
@@ -781,8 +801,9 @@
                 <footer class="Footer">
                     <div class="Copyright">
                         <div class="Copyright-container">
-                            <div class="Copyright-block"><span>© </span><span class="date-0"
-                                    data-format="yyyy">2023</span><span> Pensinfo</span></div>
+                            <div class="Copyright-block">
+                                <span>© </span>
+                                <span class="date-0 ryear" data-format="yyyy">2023</span><span> Pensinfo</span></div>
                             <div class="Copyright-block"><a href="#form" target="">Aceca del proyecto</a></div>
                         </div>
                     </div>
