@@ -258,7 +258,7 @@
 
 <body data-invalid-name-text="¡Introduzca su nombre correctamente!"
     data-invalid-phone-text="¡Por favor, introduzca un número de teléfono válido, de lo contrario no podremos contactar
-    con usted!"><script src="js/jquery.min.js"></script>
+    con usted!">
 
     <div id="app">
         <div class="App App--isMaterial">
@@ -595,31 +595,19 @@
                                                     </div>
                                                     <form name="email-form" method="post" action=""
                                                         class="form x_order_form">
-<select name="country_code" id="country_code_selector" class="text-field w-input">
-    <option value="MX">México</option>
-</select>
                                                         <label class="field-label"><strong
                                                                 class="bold-text-6">INTRODUZCA SU
                                                                 NOMBRE:</strong></label>
-                                                        <input type="text" class="text-field w-input" name="name"
-                                                            data-name="name" placeholder="Ingrese su apellido y nombre"
-                                                            id="name-4" required="" autocomplete="name" value="">
+                                                        <input type="text" class="text-field w-input" name="name" placeholder="Ingrese su apellido y nombre">
                                                         <label><strong class="bold-text-6">INTRODUZCA SU DE
                                                                 TELÉFONO:<br></strong></label>
-                                                        <input type="tel" class="text-field-2 w-input only_number"
-                                                            name="phone"
-                                                            data-name="phone"
+                                                        <input type="tel" class="text-field-2 w-input" name="phone"
                                                             placeholder="Introduzca su número de teléfono móvil"
-                                                            id="phone-4" required="" autocomplete="tel" value="">
+                                                            data-phone-pattern>
                                                         <input type="submit" value="COMPRAR CON DESCUENTO"
-                                                            class="submit-button submit-button-2 submit-button-3 w-button">
+                                                            class="submit-button submit-button-2 submit-button-3
+                                                            w-button">
                                                     </form>
-                                                    <div class="w-form-done">
-                                                        <div>¡Gracias! ¡Su solicitud ha sido recibida!</div>
-                                                    </div>
-                                                    <div class="w-form-fail">
-                                                        <div>Oops! Something went wrong while submitting the form.</div>
-                                                    </div>
                                                 </div>
                                                 <div class="box box-blue-light comments-block">
                                                     <h3>Comentarios</h3>
@@ -765,33 +753,18 @@
                                                     <div id="form"></div>
                                                     <form name="email-form" data-name="Email Form" method="post"
                                                         action="" class="form x_order_form">
-
-                                                        <select name="country_code" id="country_code_selector"
-                                                            class="text-field w-input">
-                                                            <option value="MX">México</option>
-                                                        </select>
                                                         <label class="field-label"><strong
                                                                 class="bold-text-6">INTRODUZCA SU
                                                                 NOMBRE:</strong></label>
-                                                        <input type="text" class="text-field w-input" name="name"
-                                                            data-name="name" placeholder="Ingrese su apellido y nombre"
-                                                            required="" autocomplete="name" value="">
+                                                        <input type="text" class="text-field w-input" name="name" placeholder="Ingrese su apellido y nombre">
                                                         <label><strong class="bold-text-6">INTRODUZCA SU DE
                                                                 TELÉFONO:<br></strong></label>
-                                                        <input type="tel" class="text-field-2 w-input only_number"
-                                                            name="phone"
-                                                            data-name="phone"
+                                                        <input type="tel" class="text-field-2 w-input"
                                                             placeholder="Introduzca su número de teléfono móvil"
-                                                            required="" autocomplete="tel" value="">
+                                                            data-phone-pattern>
                                                         <input type="submit" value="COMPRAR CON DESCUENTO"
                                                             class="submit-button submit-button-2 submit-button-3 w-button">
                                                     </form>
-                                                    <div class="w-form-done">
-                                                        <div>¡Gracias! ¡Su solicitud ha sido recibida!</div>
-                                                    </div>
-                                                    <div class="w-form-fail">
-                                                        <div>Oops! Something went wrong while submitting the form.</div>
-                                                    </div>
                                                 </div> <br>
                                             </div>
 
@@ -823,17 +796,35 @@
             </div>
         </div>
     </div>
-
     <script>
-        $.getScript("js/jquery.onlymask.min.js", function () {
-            $('.only_number').onlymask({
-                sendCode: true, // отправлять телефон с кодом (default)
-                displayCode: true, // отображать код страны при вводе (default)
-                displayLeadingPlus: true, // выводить "+" спереди телефонного кода (default)
-                formats: {
-                    pe: '+52 *** *** ****' // формат для вашей страны
+        document.addEventListener("DOMContentLoaded", function () {
+            var eventCalllback = function (e) {
+                var el = e.target,
+                    clearVal = el.dataset.phoneClear,
+                    pattern = el.dataset.phonePattern,
+                    matrix_def = "+52 ___ ___ ____",
+                    matrix = pattern ? pattern : matrix_def,
+                    i = 0,
+                    def = matrix.replace(/\D/g, ""),
+                    val = e.target.value.replace(/\D/g, "");
+                if (clearVal !== 'false' && e.type === 'blur') {
+                    if (val.length < matrix.match(/([\_\d])/g).length) {
+                        e.target.value = '';
+                        return;
+                    }
                 }
-            });
+                if (def.length >= val.length) val = def;
+                e.target.value = matrix.replace(/./g, function (a) {
+                    return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ?
+                        "" : a
+                });
+            }
+            var phone_inputs = document.querySelectorAll('[data-phone-pattern]');
+            for (let elem of phone_inputs) {
+                for (let ev of ['input', 'blur', 'focus']) {
+                    elem.addEventListener(ev, eventCalllback);
+                }
+            }
         });
     </script>
 </body>
