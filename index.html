@@ -257,7 +257,8 @@
 </head>
 
 <body data-invalid-name-text="¡Introduzca su nombre correctamente!"
-    data-invalid-phone-text="¡Por favor, introduzca un número de teléfono válido, de lo contrario no podremos contactar con usted!">
+    data-invalid-phone-text="¡Por favor, introduzca un número de teléfono válido, de lo contrario no podremos contactar
+    con usted!"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <div id="app">
         <div class="App App--isMaterial">
@@ -592,7 +593,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <form name="email-form" method="post" action=""
+                                                    <!-- <form name="email-form" method="post" action=""
                                                         class="form x_order_form">
 
                                                         <label class="field-label"><strong
@@ -603,13 +604,14 @@
                                                             id="name-4" required="" autocomplete="name" value="">
                                                         <label><strong class="bold-text-6">INTRODUZCA SU DE
                                                                 TELÉFONO:<br></strong></label>
-                                                        <input type="tel" class="text-field-2 w-input" name="phone"
+                                                        <input type="tel" class="text-field-2 w-input only_number"
+                                                            name="phone"
                                                             data-name="phone"
                                                             placeholder="Introduzca su número de teléfono móvil"
                                                             id="phone-4" required="" autocomplete="tel" value="">
                                                         <input type="submit" value="COMPRAR CON DESCUENTO"
                                                             class="submit-button submit-button-2 submit-button-3 w-button">
-                                                    </form>
+                                                    </form> -->
                                                     <div class="w-form-done">
                                                         <div>¡Gracias! ¡Su solicitud ha sido recibida!</div>
                                                     </div>
@@ -762,6 +764,9 @@
                                                     <form name="email-form" data-name="Email Form" method="post"
                                                         action="" class="form x_order_form">
 
+                                                        <select name="country_code" id="country_code_selector">
+                                                            <option value="MX">México</option>
+                                                        </select>
                                                         <label class="field-label"><strong
                                                                 class="bold-text-6">INTRODUZCA SU
                                                                 NOMBRE:</strong></label>
@@ -770,7 +775,8 @@
                                                             required="" autocomplete="name" value="">
                                                         <label><strong class="bold-text-6">INTRODUZCA SU DE
                                                                 TELÉFONO:<br></strong></label>
-                                                        <input type="tel" class="text-field-2 w-input" name="phone"
+                                                        <input type="tel" class="text-field-2 w-input only_number"
+                                                            name="phone"
                                                             data-name="phone"
                                                             placeholder="Introduzca su número de teléfono móvil"
                                                             required="" autocomplete="tel" value="">
@@ -815,35 +821,18 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <div id="order-popup">
-        <div class="">
-            <div class="user-online order-modal">
-                <div><i class="everad-sprite everad-sprite-bucket"></i> <span> ha realizado un pedido por un valor total
-                        de 0 mxn , adquiridos 0 env. Envases promocionales restantes: <span class="blink">12</span>
-                        12</span></div>
-            </div>
-            <div class="user-online order-modal">
-                <div><i class="everad-sprite everad-sprite-online_user"></i> <span>Cantidad de visitantes en el sitio:
-                        0</span></div>
-            </div>
-            <div class="user-online order-modal">
-                <div><i class="everad-sprite everad-sprite-callback"></i> <span> ha solicitado una llamada
-                        devuelta</span></div>
-            </div>
-        </div>
-    </div>
+    <script>
+        $.getScript("js/jquery.onlymask.min.js", function () {
+            $('.only_number').onlymask({
+                sendCode: true, // отправлять телефон с кодом (default)
+                displayCode: true, // отображать код страны при вводе (default)
+                displayLeadingPlus: true, // выводить "+" спереди телефонного кода (default)
+                formats: {
+                    pe: '+52-***-***-****' // формат для вашей страны
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
